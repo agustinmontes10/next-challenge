@@ -1,32 +1,28 @@
-import { BaseReducerPropsType, ServerStatus } from '@/models/globalModels';
 import { RootState } from '@/redux/rootReducer';
 import Head from 'next/head';
 import React from 'react';
 import { connect } from 'react-redux';
-import { testCall } from '@/redux/base/actions';
+import { getPokemons } from '@/redux/base/actions/pokemons';
+import 'animate.css';
+import Link from 'next/link';
+import Layout from '../components/layout';
 
 const mapStateToProps = (state: RootState) => {
   return {
-    baseState: state.base
   }
 }
 const mapDispatchToProps = {
-  testCall
+  getPokemons
 }
 export type HomePropTypes = {
-  baseState: BaseReducerPropsType,
-  testCall: Function
+  getPokemons: Function
 }
 
-const Home = ({baseState, testCall}: HomePropTypes) =>  {
+const Home = ({getPokemons}: HomePropTypes) =>  {
 
-  React.useEffect(() => {
-    console.log("baseState",baseState)
-  },[baseState.somethingStatus])
-
-  React.useEffect(() => {
-    testCall()
-  },[])
+  const handleClick = () => {
+    getPokemons()
+  }
 
   return (
     <>
@@ -36,18 +32,14 @@ const Home = ({baseState, testCall}: HomePropTypes) =>  {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`container`}>
-        <div className={`row mt-4`}>
-          <div className={`col-6`}>
-            <p>Something!</p>
-            <p>Here goes the first version</p>
-          </div>
-          <div className={`col-6`}>
-            <p>{ServerStatus[baseState.somethingStatus]}</p>
-          </div>
-        </div>
-
-      </main>
+      <Layout>
+        <div className={`d-flex justify-content-center align-items-center h-100`}>
+          <img src="/imgPrincipal.png" alt="" className='h-100 animate__animated animate__fadeInLeft' />
+          <Link href="/pokemons" type="button" className="btn btn-outline-warning btn-lg animate__animated animate__tada" onClick={ handleClick }>
+            Obtener Pokemons
+          </Link>
+        </div>  
+      </Layout>
     </>
   )
 }

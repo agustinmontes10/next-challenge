@@ -1,4 +1,5 @@
 import '@/styles/globals.scss'
+import '@/styles/pokemons.scss'
 import type { AppProps } from 'next/app'
 import React from 'react'
 import { Provider } from 'react-redux'

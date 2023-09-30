@@ -6,3 +6,4 @@ export const testCall = () => (dispatch: any) => {
     dispatch({ type: t.FETCH_SOMETHING, payload: "Hello World" })
   }, 1000)
 }
+
