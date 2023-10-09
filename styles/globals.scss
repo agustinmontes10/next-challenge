@@ -116,13 +116,21 @@ a {
   animation: spin 1.5s linear infinite;
 }
 
-.pagination {
-  --bs-pagination-border-color: black;
+
+.btn-page {
+  background-color: transparent;
+  margin: 5px;
+  padding: 12px;
+  border: 2px solid $color-primary;
+  border-radius: 13px;
 }
 
-.page-link {
+.page-active {
   background-color: $color-primary;
-  color: white;
+}
+
+.btn-page:hover {
+  background-color: #0e152b5c;
 }
 
 .disabled > .page-link {

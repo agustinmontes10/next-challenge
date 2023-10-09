@@ -1,4 +1,4 @@
-import { PokemonsReducerPropsType } from "@/models/globalModels";
+import { PokemonsReducerPropsType, ServerStatus } from "@/models/globalModels";
 import { RootState } from "@/redux/rootReducer";
 import { connect } from "react-redux";
 import { ArrowCircleLeft } from "@phosphor-icons/react";
@@ -7,6 +7,8 @@ import Layout from "../../components/layout";
 import PokemonList from "../../components/pokemonList";
 import Error from "@/components/error";
 import Loading from "@/components/loading";
+import { useEffect } from "react";
+import { getPokemons } from "@/redux/base/actions/pokemons";
 
 const mapStateToProps = (state: RootState) => {
     return {
@@ -15,14 +17,21 @@ const mapStateToProps = (state: RootState) => {
 }
 
 const mapDispatchToProps = {
-
+    getPokemons,
 }
 
 export type PokemonsPropTypes = {
     pokemonsState: PokemonsReducerPropsType,
+    getPokemons: Function,
 } 
   
-const PokemonsPage = ({pokemonsState}: PokemonsPropTypes) => {
+const PokemonsPage = ({pokemonsState, getPokemons}: PokemonsPropTypes) => {
+
+    useEffect(() => {
+        console.log('useEffect')
+        getPokemons();
+    }, [])
+    
 
     const { status, pokemons } = pokemonsState;
 
@@ -33,9 +42,9 @@ const PokemonsPage = ({pokemonsState}: PokemonsPropTypes) => {
                 </Link>        
 
                 {
-                    status === 1 ? (
+                    status === ServerStatus.error ? (
                         <Error />
-                    ) : status === 3 ? (
+                    ) : status === ServerStatus.fetching ? (
                         <Loading />
                     ) : (
                         <PokemonList pokemons={pokemons} />

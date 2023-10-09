@@ -12,17 +12,13 @@ const mapStateToProps = (state: RootState) => {
   }
 }
 const mapDispatchToProps = {
-  getPokemons
+  
 }
 export type HomePropTypes = {
-  getPokemons: Function
+  
 }
 
-const Home = ({getPokemons}: HomePropTypes) =>  {
-
-  const handleClick = () => {
-    getPokemons()
-  }
+const Home = () =>  {
 
   return (
     <>
@@ -35,7 +31,7 @@ const Home = ({getPokemons}: HomePropTypes) =>  {
       <Layout>
         <div className={`d-flex justify-content-center align-items-center h-100`}>
           <img src="/imgPrincipal.png" alt="" className='h-100 animate__animated animate__fadeInLeft' />
-          <Link href="/pokemons" type="button" className="btn btn-outline-warning btn-lg animate__animated animate__tada" onClick={ handleClick }>
+          <Link href="/pokemons" type="button" className="btn btn-outline-warning btn-lg animate__animated animate__tada" >
             Obtener Pokemons
           </Link>
         </div>  

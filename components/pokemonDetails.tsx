@@ -8,20 +8,21 @@ export type PokemonDetailsPropsTypes = {
 
 const PokemonDetails = ({ pokemon }: PokemonDetailsPropsTypes) => {
 
+    const imageURL = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`
+
     return (
         <div className="pokemonDetails animate__animated animate__fadeIn animate__slow">
 
-            <div className="d-flex">
-                <img src="/iconPokeballAbierto.png" className="me-3" alt="" style={{ width: '48px' }}/>
-                <h2>{pokemon.name}</h2>
-            </div>
+            <img src={imageURL} alt="" />
+            
+            <h2 className="text-break" style={{maxWidth: '100%'}}>{pokemon.name}</h2>
             
             <div className="d-flex flex-column w-100 mt-4 mb-4">
                 <h4>Habilidades</h4>
-                <div className="d-flex">
+                <div className="d-flex flex-wrap">
 
                     {pokemon.abilities.map((ability: Ability) => (
-                        <div className="d-flex skill m-3">
+                        <div className="d-flex skill m-3" key={ability.ability.name}>
                             <Lightning size={28} color="#d0b21b" weight="fill" className="me-2" />
                             <h6>{ ability.ability.name }</h6>
                         </div>

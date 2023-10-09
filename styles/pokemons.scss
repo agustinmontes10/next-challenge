@@ -9,7 +9,8 @@ $color-primary: #0e152b;
   }
   
   .pokemonItem {
-    padding: 50px 20px 50px 20px;
+    min-height: 20%;
+    justify-content: center;
     background-color: $color-primary;
     border-radius: 10px;
     box-shadow: 12px 12px 5px rgb(8 8 8);
@@ -24,6 +25,7 @@ $color-primary: #0e152b;
     border-radius: 10px;
     box-shadow: 20px 20px 5px rgb(8 8 8);
     width: fit-content;
+    max-width: 80vw;
     display: flex;
     flex-direction: column;
     align-items: center;

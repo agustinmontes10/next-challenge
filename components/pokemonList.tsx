@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Card from "./card";
 import { PokemonCard } from "@/models/globalModels";
+import Pagination from "./pagination";
 
 type PokemonListProps = {
     pokemons: [];
@@ -23,9 +24,8 @@ const PokemonList = ({ pokemons }: PokemonListProps) => {
         }
     };
 
-
     return (
-        <div className="d-flex flex-column justify-content-between h-100">
+        <div className="d-flex flex-column justify-content-between h-100" style={{maxWidth: '100%'}}>
 
             <div className="row justify-content-center pokemonList">
                 {currentPokemons.map((pokemon: PokemonCard) => (
@@ -33,45 +33,89 @@ const PokemonList = ({ pokemons }: PokemonListProps) => {
                 ))}
             </div>
             
-            <nav aria-label="Page navigation" className="d-flex justify-content-center animate__animated animate__fadeIn">
-                <ul className="pagination">
-                    <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-                    <button className="page-link" onClick={() => handlePageChange(currentPage - 1)}>
-                        Previous
-                    </button>
-                    </li>
-
-                    {Array.from({ length: Math.min(totalPages, 5) }, (_, index) => (
-                    <li className={`page-item ${index + 1 === currentPage ? "active" : ""}`} key={index + 1}>
-                        <button className="page-link" onClick={() => handlePageChange(index + 1)}>
-                        {index + 1}
-                        </button>
-                    </li>
-                    ))}
-
-                    {totalPages > 5 && (
-                    <li className="page-item disabled">
-                        <span className="page-link">...</span>
-                    </li>
-                    )}
-
-                    <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-                    <button className="page-link" onClick={() => handlePageChange(totalPages)}>
-                        {totalPages}
-                    </button>
-                    </li>
-
-                    <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-                    <button className="page-link" onClick={() => handlePageChange(currentPage + 1)}>
-                        Next
-                    </button>
-                    </li>
-                </ul>
-            </nav>
-
+            <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+            />
 
         </div>
     );
 };
 
 export default PokemonList;
+
+
+/*
+            <nav aria-label="Page navigation" className="d-flex justify-content-center ">
+                <ul className="pagination">
+
+                    <li className={`${currentPage === 1 ? "disabled" : ""}`}>
+                        <button className="" onClick={() => handlePageChange(currentPage - 1)}>
+                            Previous
+                        </button>
+                    </li>
+
+                    <li className=''>
+                        <button className="" onClick={() => handlePageChange(1)}>
+                            Primera
+                        </button>
+                    </li>
+
+                    {
+                        (currentPage > 2) ??
+                            <li className=''>
+                                <button className="" onClick={() => handlePageChange(currentPage-2)}>
+                                    {currentPage-2}
+                                </button>
+                            </li>
+                    }
+                    
+                    {
+                        (currentPage > 1) ??
+                            <li className=''>
+                                <button className="" onClick={() => handlePageChange(currentPage-1)}>
+                                    {currentPage-1}
+                                </button>
+                            </li>
+                    }
+                    
+                    <li className="page-item disabled">
+                        <button className="page-link" onClick={() => handlePageChange(currentPage)}>
+                            {currentPage}
+                        </button>
+                    </li>
+                    
+                    {
+                        (currentPage < totalPages) ??
+                            <li className=''>
+                                <button className="" onClick={() => handlePageChange(currentPage+1)}>
+                                    {currentPage+1}
+                                </button>
+                            </li>
+                    }
+                    
+                    {
+                        ( currentPage < (totalPages - 1) ) ??
+                            <li className=''>
+                                <button className="" onClick={() => handlePageChange(currentPage+2)}>
+                                    {currentPage+2}
+                                </button>
+                            </li>
+                    }
+
+                    <li className=''>
+                        <button className="" onClick={() => handlePageChange(totalPages)}>
+                            Ultima
+                        </button>
+                    </li>
+
+                    <li className={`${currentPage === totalPages ? "disabled" : ""}`}>
+                        <button className="" onClick={() => handlePageChange(currentPage + 1)}>
+                            Next
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+*/
